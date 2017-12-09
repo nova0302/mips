@@ -16,7 +16,7 @@ SRCS = ./../../rtl/verilog/led_test.sv
 #PART = EP3C25F324C6
 FAMILY = "Cyclone IV E"
 PART = EP4CE22F17C6
-BOARDFILE = NEEKPins
+BOARDFILE = Brd_DE0_Nano
 ###################################################################
 
 ###################################################################
