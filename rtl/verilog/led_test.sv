@@ -8,18 +8,19 @@ module led_test
 `else
    #(parameter NUM_COUNT = 50000000)
 `endif
-
    (
-    input 	 clk, rst_n,
-    output logic led0
+    input             CLOCK_50,
+    input [1:0]       KEY,
+    output wire [7:0] LED
     );
 
-   int 		 count_r, count_n;
-   logic 	 led0_r, led0_n;
 
-   assign led0 = led0_r;
 
-   always_ff @(posedge clk or negedge rst_n)
+   int                count_r, count_n;
+   logic [7:0]        LED_r, LED_n;
+   wire               rst_n = KEY[0];
+   assign LED = LED_r;
+   always_ff @(posedge CLOCK_50 or negedge rst_n)
      if(!rst_n)
        count_r <= 0;
      else
@@ -32,17 +33,17 @@ module led_test
        count_n = count_r + 1;
 
 
-   always_ff @(posedge clk or negedge rst_n)
+   always_ff @(posedge CLOCK_50 or negedge rst_n)
      if(!rst_n)
-       led0_r <= 0;
+       LED_r <= 0;
      else
-       led0_r <= led0_n;
+       LED_r <= LED_n;
 
    always_comb
      if(count_r == NUM_COUNT)
-       led0_n = ~led0_r;
+       LED_n = ~LED_r;
      else
-       led0_n = led0_r;
+       LED_n = LED_r;
 
 
 
